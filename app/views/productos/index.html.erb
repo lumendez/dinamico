@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Productos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Precio</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @productos.each do |producto| %>
+      <tr>
+        <td><%= producto.nombre %></td>
+        <td><%= producto.precio %></td>
+        <td><%= link_to 'Show', producto %></td>
+        <td><%= link_to 'Edit', edit_producto_path(producto) %></td>
+        <td><%= link_to 'Destroy', producto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= form_tag new_producto_path, method: :get do %>
+  <%= select_tag :product_type_id, options_from_collection_for_select(ProductType.all, :id, :name) %>
+  <%= submit_tag "Nuevo producto", name: nil %>
+<% end %>
+<br>
+
+<%= link_to 'New Producto', new_producto_path %>
